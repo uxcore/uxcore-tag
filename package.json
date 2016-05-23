@@ -48,6 +48,9 @@
   "kuma-base": "~1.0.1",
   "uxcore-kuma": "~2.0.0"
  },
+ "publishConfig": {
+  "registry": "http://registry.npm.alibaba-inc.com"
+ },
  "dependencies": {
   "classnames": "^2.1.2",
   "object-assign": "^4.0.0",
