@@ -175,7 +175,7 @@ TagItem.defaultProps = {
   onClick: function onClick() {}, // 点标签回调
   maxDisplayCount: 99, // 最大显示数字
   onAddCount: function onAddCount() {}, // 点击增加数字的加号回调
-  onDelete: function onDelete() {}, // 点击删除icon回调
+  onDelete: function onDelete() {}, // 点击删除icon回调 注意手动调用cb，否则弹窗不会消失
   confirmDeleteText: '', // 确认删除文案，如果不填则直接触发onDelete回调
   locale: 'zh-cn'
 };
