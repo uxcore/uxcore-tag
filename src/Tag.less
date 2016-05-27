@@ -53,7 +53,7 @@
       padding: 0 10px;
     }
 
-    .uxcore-tag-item-liked {
+    .uxcore-tag-item-count {
       width: 28px;
       text-align: center;
       border-left: 1px solid #d7d7d7;
@@ -70,13 +70,9 @@
 
     &.create-by-owner {
       background-color: #fafafa;
-
-      .uxcore-tag-item-add-like {
-        background-color: #fafafa;
-      }
     }
 
-    .uxcore-tag-item-add-like {
+    .uxcore-tag-item-add-count {
       display: none;
       width: 28px;
       background: #fff;
@@ -124,54 +120,55 @@
 
     .uxcore-tag-item-delete {
       position: absolute;
-      background: #f00;
+      background: @mainColor;
       z-index: 10;
       color: #fff;
-      width: 16px;
-      height: 16px;
+      width: 14px;
+      height: 14px;
       display: none;
       border-radius: 50%;
       text-align: center;
-      line-height: 18px;
+      line-height: 14px;
       font-size: 10px;
       right: -8px;
       top: -8px;
+
+      i {
+        font-size: 12px
+      }
     }
 
-    &.like {
-      .can-like:hover,.is-zero {
-        .uxcore-tag-item-liked {
+
+    .uxcore-tag-item-option {
+      &.can-add-count:hover {
+        .uxcore-tag-item-count {
+            display: none;
+          }
+          .uxcore-tag-item-add-count {
+            display: inline-block;
+          }
+      }
+
+      &.is-zero {
+        .uxcore-tag-item-count {
           display: none;
         }
-        .uxcore-tag-item-add-like {
-          display: inline-block;
-        }
       }
 
-      /* 自己创建并且没有人赞，那么右边是空的 */
-      .create-by-me.is-zero {
-          .uxcore-tag-item-add-like {
-            display: none;
+      &.is-zero.can-add-count {
+        .uxcore-tag-item-add-count {
+            display: inline-block;
           }
-          .uxcore-tag-item-liked {
-            display: none;
-          }
-
       }
+
     }
 
-    &.delete {
-      &.can-delete:hover {
-        .uxcore-tag-item-delete {
+    &.can-delete:hover {
+      .uxcore-tag-item-delete {
           display: inline-block;
         }
-      }
     }
-  }
 
-  .uxcore-tag-more {
-    line-height: 30px;
-    margin: 2px 2px 2px 10px;
   }
 
   .uxcore-tag-add {
@@ -225,16 +222,10 @@
     }
   }
 }
+
 .uxcore-tag-popup-delete {
   i {
     color: @mainColor;
     margin-right: 8px;
   }
-}
-.uxcore-tag-item-tooltip-like-numbers {
-  color: @mainColor;
-}
-.uxcore-tag-dialog-count {
-  font-weight: 400;
-  margin: 10px 0 20px;
 }

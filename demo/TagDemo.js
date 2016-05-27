@@ -7,137 +7,83 @@
  */
 
 let classnames = require('classnames');
+const ToolTip = require('uxcore-tooltip');
 
 let Tag = require('../src');
+let Item = Tag.Item;
 
 const data = [
   {
     tag: 'owner创建0',
-    liked: 0,
-    hasLiked: false,
-    createByMe: false,
-    createByOwner: true,
-    likeList: {
-      name: '吴朋（宵何）',
-      workNo: 109094
-    }
+    count: 0,
+    canAddCount: true,
+    createByOwner: true
   },
   {
     tag: 'owner创建1',
-    liked: 1,
-    hasLiked: false,
-    createByMe: false,
-    createByOwner: true,
-    likeList: {
-      name: '吴朋（宵何）',
-      workNo: 109094
-    }
+    count: 1,
+    canAddCount: true,
+    createByOwner: true
   },
   {
     tag: 'owner创建100',
-    liked: 100,
-    hasLiked: false,
-    createByMe: false,
-    createByOwner: true,
-    likeList: {
-      name: '吴朋（宵何）',
-      workNo: 109094
-    }
+    count: 100,
+    canAddCount: true,
+    createByOwner: true
   },
   {
     tag: '自己创建0',
-    liked: 0,
-    hasLiked: false,
-    createByMe: true,
-    createByOwner: false,
+    count: 0,
+    canAddCount: true,
+    createByOwner: false
   },
   {
     tag: '自己创建1',
-    liked: 1,
-    hasLiked: false,
-    createByMe: true,
-    createByOwner: false,
-    likeList: {
-      name: '吴朋（宵何）',
-      workNo: 109094
-    }
+    count: 1,
+    canAddCount: true,
+    createByOwner: false
   },
   {
     tag: '自己创建100',
-    liked: 100,
-    hasLiked: false,
-    createByMe: true,
-    createByOwner: false,
-    likeList: {
-      name: '吴朋（宵何）',
-      workNo: 109094
-    }
+    count: 100,
+    canAddCount: true,
+    createByOwner: false
   },
   {
     tag: '他人创建0',
-    liked: 0,
-    hasLiked: false,
-    createByMe: false,
-    createByOwner: false,
-    likeList: {
-      name: '吴朋（宵何）',
-      workNo: 109094
-    }
+    count: 0,
+    canAddCount: true,
+    createByOwner: false
   },
   {
     tag: '他人创建1',
-    liked: 1,
-    hasLiked: false,
-    createByMe: false,
-    createByOwner: false,
-    likeList: {
-      name: '吴朋（宵何）',
-      workNo: 109094
-    }
+    count: 1,
+    canAddCount: true,
+    createByOwner: false
   },
   {
     tag: '他人创建100',
-    liked: 100,
-    hasLiked: false,
-    createByMe: false,
-    createByOwner: false,
-    likeList: {
-      name: '吴朋（宵何）',
-      workNo: 109094
-    }
+    count: 100,
+    canAddCount: true,
+    createByOwner: false
   },
   {
     tag: '测试一下',
-    liked: 5,
-    hasLiked: false,
-    createByMe: false,
-    createByOwner: false,
-    likeList: {
-      name: '吴朋（宵何）',
-      workNo: 109094
-    }
+    count: 5,
+    canAddCount: true,
+    createByOwner: false
   },
   {
     tag: '点过赞',
-    liked: 100,
-    hasLiked: true,
-    createByMe: false,
-    createByOwner: false,
-    likeList: {
-      name: '吴朋（宵何）',
-      workNo: 109094
-    }
+    count: 100,
+    canAddCount: false,
+    createByOwner: false
   },
   {
     tag: '点过赞2',
-    liked: 2,
-    hasLiked: true,
-    createByMe: true,
-    createByOwner: false,
-    likeList: {
-      name: '董培杰（酒舟）',
-      workNo: 82815
-    }
+    count: 2,
+    canAddCount: false,
+    createByOwner: false
   }
 ]
 
@@ -145,48 +91,104 @@ class Demo extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {
+      data: data
+    }
   }
 
   onClickTag(tag) {
 
     console.log('点击标签: ', tag)
   }
-  onAdd(tag, success, fail) {
-    console.log('添加标签: ' + tag);
-    success()
+  onAdd(tag) {
+    let me = this,
+      data = me.state.data;
+    
 
+    let item = {
+      tag: tag,
+      count: 0,
+      canAddCount: false,
+      createByOwner: false
+    }
+
+    data.push(item);
+
+    me.setState({
+      data: data
+    })
+
+    console.log('添加标签: ' + tag);
   }
-  onLike(tag, success, fail) {
+  onLike(tag) {
+     let me = this,
+      data = me.state.data;
+
+      data = data.map(function (item) {
+        if (item.tag == tag) {
+          item.count = item.count + 1;
+          item.canAddCount = false;
+        }
+        return item
+      })
+
+     me.setState({
+      data: data
+     }) 
+
     console.log('赞标签: ', tag);
-    success();
   }
-  onDelete(tag, success, fail) {
+  onDelete(tag, cb) {
+    let me = this,
+      data = me.state.data;
+
+      data = data.filter(function (item) {
+        return item.tag != tag
+      })
+
+      cb && cb();
+     me.setState({
+      data: data
+     }) 
+
     console.log('删除标签: ' + tag);
-    success();
   }
 
   render() {
     let me = this;
 
     let props = {
-      data: data,
       className: 'tag-classname',
-      mode: 'delete', // delete | like
       addTags: true,
-      maxTags: 20,
-      maxDisplayLiked: 99,
-      onClickTag: me.onClickTag.bind(me),
       onAdd: me.onAdd.bind(me),
-      onLike: me.onLike.bind(me),
-      onDelete: me.onDelete.bind(me),
-
       locale: 'zh-cn'
-      //locale: 'en'
+      //locale: 'en-us'
     }
+
     return (
       <div className="demo">
-        <Tag {...props}/>
+        
+        <Tag {...props}>
+        {me.state.data.map(function (item, index) {
+            return <Item 
+                key={"uxcore-tag-item-" + index}
+                className={item.createByOwner ? "create-by-owner" : ''}
+                tag={item.tag}
+                count={item.count}
+                canAddCount={item.canAddCount}
+                canDelete={true}
+                onClick={me.onClickTag.bind(me)}
+                maxDisplayCount={99}
+                onAddCount={me.onLike.bind(me)}
+                onDelete={me.onDelete.bind(me)}
+                confirmDeleteText="确定删除该标签吗?"
+                locale="zh-cn"
+                >
+                {item.tag}
+              </Item>
+        })}
+          
+        </Tag>
       </div>
     );
   }
