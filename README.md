@@ -117,6 +117,7 @@ onLike(tag) {
 ## Props
 
 | 配置项              | 类型       | 必填    | 默认值     | 功能/备注     |
+| -------- | -------- |-------- |-------- |-------- |
 |count               |number     |optional|0          | 标签后面的数字 |
 |canAddCount         |boolean    |optional|false| 是否可以增加数字     |
 
