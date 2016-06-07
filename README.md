@@ -120,7 +120,6 @@ onLike(tag) {
 | -------- | -------- |-------- |-------- |-------- |
 |count               |number     |optional|0          | 标签后面的数字 |
 |canAddCount         |boolean    |optional|false| 是否可以增加数字     |
-
 |canDelete           |boolean    |optional|false| 是否可以删除标签     | 
 |onClick             |function   |optional|noop | 点标签回调          |
 |maxDisplayCount     |number     |optional| 99  | 最大显示数字|
