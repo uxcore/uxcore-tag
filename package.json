@@ -1,5 +1,5 @@
 {
- "name": "@ali/uxcore-tag",
+ "name": "uxcore-tag",
  "version": "1.1.1",
  "description": "uxcore-tag component for uxcore.",
  "repository": "https://github.com/uxcore/uxcore-tag.git",
@@ -47,9 +47,6 @@
   "git-rev": "~0.2.1",
   "kuma-base": "~1.0.1",
   "uxcore-kuma": "~2.0.0"
- },
- "publishConfig": {
-  "registry": "http://registry.npm.alibaba-inc.com"
  },
  "dependencies": {
   "classnames": "^2.1.2",
