@@ -109,7 +109,7 @@ onLike(tag) {
 ````
 
 ## uxcore-tag
-![image](http://aligitlab.oss-cn-hangzhou-zmf.aliyuncs.com/uploads/platform/pay-roll/68f3ae72f7209ce883ac7442f216c782/image.png)
+![image](https://img.alicdn.com/tps/TB1BPtHKpXXXXcCXpXXXXXXXXXX-328-211.png)
 
 
 ## API
