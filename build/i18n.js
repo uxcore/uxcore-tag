@@ -9,5 +9,9 @@ module.exports = {
   'en-us': {
     deleteCancelText: 'Cancel',
     deleteOkText: 'Apply'
+  },
+  'pl-pl': {
+    deleteCancelText: 'Anuluj',
+    deleteOkText: 'Zastosuj'
   }
 };
