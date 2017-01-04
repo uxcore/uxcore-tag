@@ -1,12 +1,4 @@
-/**
- * TagItem Component for uxcore
- * @author peijie.dpj
- *
- * Copyright 2015-2016, Uxcore Team, Alinw.
- * All rights reserved.
- */
-
-"use strict";
+'use strict';
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
 
@@ -18,8 +10,15 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
 
+/**
+ * TagItem Component for uxcore
+ * @author peijie.dpj
+ *
+ * Copyright 2015-2016, Uxcore Team, Alinw.
+ * All rights reserved.
+ */
+
 var React = require('react');
-var ReactDom = require('react-dom');
 var classnames = require('classnames');
 var Popover = require('uxcore-popover');
 
@@ -38,15 +37,14 @@ var TagItem = function (_React$Component) {
     };
 
     _this.lang = Lang[props.locale];
-
     return _this;
   }
 
   TagItem.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
-    var me = this,
-        props = me.props;
+    var me = this;
+    var props = me.props;
 
-    if (nextProps.count == props.count + 1) {
+    if (nextProps.count === props.count + 1) {
       me.setState({
         animationTag: props.tag
       });
@@ -54,43 +52,42 @@ var TagItem = function (_React$Component) {
   };
 
   TagItem.prototype.onClick = function onClick(tag) {
-    var me = this,
-        props = me.props;
+    var me = this;
+    var props = me.props;
 
     props.onClick(tag);
   };
 
   TagItem.prototype.onAddCount = function onAddCount(tag) {
-    var me = this,
-        props = me.props;
+    var me = this;
+    var props = me.props;
 
     props.onAddCount(tag);
   };
 
   TagItem.prototype.onDelete = function onDelete(tag, cb) {
-    var me = this,
-        props = me.props;
+    var me = this;
+    var props = me.props;
 
     props.onDelete(tag, cb);
   };
 
-  TagItem.prototype._renderCount = function _renderCount(num) {
-    var me = this,
-        props = me.props;
+  TagItem.prototype.renderCount = function renderCount(num) {
+    var me = this;
+    var props = me.props;
 
     if (num > props.maxDisplayCount) {
       return props.maxDisplayCount + '+';
-    } else {
-      return num;
     }
+    return num;
   };
 
   TagItem.prototype.render = function render() {
     var _classnames;
 
-    var me = this,
-        props = me.props,
-        lang = me.lang;
+    var me = this;
+    var props = me.props;
+    var lang = me.lang;
 
     var deleteOverlay = void 0;
 
@@ -111,35 +108,48 @@ var TagItem = function (_React$Component) {
       'li',
       {
         key: props.key,
-        className: classnames("uxcore-tag-item", (_classnames = {}, _defineProperty(_classnames, props.className, !!props.className), _defineProperty(_classnames, 'can-delete', props.canDelete), _classnames)) },
+        className: classnames('uxcore-tag-item', (_classnames = {}, _defineProperty(_classnames, props.className, !!props.className), _defineProperty(_classnames, 'can-delete', props.canDelete), _classnames))
+      },
       React.createElement(
         'span',
-        { className: 'uxcore-tag-item-tag', onClick: me.onClick.bind(me, props.tag) },
+        {
+          className: 'uxcore-tag-item-tag',
+          onClick: me.onClick.bind(me, props.tag)
+        },
         props.children
       ),
       React.createElement(
         'span',
-        { className: classnames("uxcore-tag-item-option", {
+        {
+          className: classnames('uxcore-tag-item-option', {
             'can-add-count': props.canAddCount,
-            'is-zero': props.count == 0
-          }) },
+            'is-zero': props.count === 0
+          })
+        },
         React.createElement(
           'span',
-          { className: classnames("uxcore-tag-item-count", {
+          {
+            className: classnames('uxcore-tag-item-count', {
               'max-count': props.count > props.maxDisplayCount
-            }) },
-          me._renderCount(props.count)
+            })
+          },
+          me.renderCount(props.count)
         ),
         React.createElement(
           'span',
-          { className: 'uxcore-tag-item-add-count', onClick: me.onAddCount.bind(me, props.tag) },
+          {
+            className: 'uxcore-tag-item-add-count',
+            onClick: me.onAddCount.bind(me, props.tag)
+          },
           React.createElement('i', { className: 'kuma-icon kuma-icon-add' })
         ),
         React.createElement(
           'span',
-          { className: classnames("uxcore-tag-item-add-animation", {
-              show: me.state.animationTag == props.tag
-            }) },
+          {
+            className: classnames('uxcore-tag-item-add-animation', {
+              show: me.state.animationTag === props.tag
+            })
+          },
           '+1'
         ),
         props.confirmDeleteText ? React.createElement(
@@ -151,7 +161,8 @@ var TagItem = function (_React$Component) {
             showButton: true,
             onOk: me.onDelete.bind(me, props.tag),
             okText: lang.deleteOkText,
-            cancelText: lang.deleteCancelText },
+            cancelText: lang.deleteCancelText
+          },
           React.createElement(
             'span',
             { className: 'uxcore-tag-item-delete' },
@@ -161,7 +172,8 @@ var TagItem = function (_React$Component) {
           'span',
           {
             className: 'uxcore-tag-item-delete',
-            onClick: me.onDelete.bind(me, props.tag) },
+            onClick: me.onDelete.bind(me, props.tag)
+          },
           React.createElement('i', { className: 'kuma-icon kuma-icon-close' })
         )
       )
@@ -199,6 +211,6 @@ TagItem.propTypes = {
   locale: React.PropTypes.string
 };
 
-TagItem.displayName = "TagItem";
+TagItem.displayName = 'TagItem';
 
 module.exports = TagItem;

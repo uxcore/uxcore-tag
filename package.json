@@ -1,6 +1,6 @@
 {
  "name": "uxcore-tag",
- "version": "1.0.2",
+ "version": "1.1.0",
  "description": "uxcore-tag component for uxcore.",
  "repository": "https://github.com/uxcore/uxcore-tag.git",
  "author": "peijie.dpj",
@@ -43,10 +43,7 @@
  "dependencies": {
   "classnames": "^2.1.2",
   "object-assign": "^4.0.0",
-  "uxcore-dialog": "~0.3.6",
-  "uxcore-message": "~0.2.4",
-  "uxcore-popover": "~0.3.3",
-  "uxcore-tooltip": "~0.3.3"
+  "uxcore-popover": "~0.4.0"
  },
  "contributors": [],
  "license": "MIT"
