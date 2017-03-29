@@ -9,6 +9,7 @@
 
 const React = require('react');
 const classnames = require('classnames');
+const Icon = require('uxcore-icon');
 
 const TagItem = require('./Item');
 const Lang = require('./i18n');
@@ -27,8 +28,6 @@ class Tag extends React.Component {
       inputValue: '',
       animationTag: '',
     };
-
-    this.lang = Lang[props.locale.toLowerCase()];
   }
 
   onAdd() {
@@ -63,9 +62,9 @@ class Tag extends React.Component {
   onInputBlur() {
     const me = this;
 
-    me.setState({
-      showInput: false,
-    });
+    // me.setState({
+    //   showInput: false,
+    // });
   }
 
 
@@ -88,8 +87,8 @@ class Tag extends React.Component {
 
   renderAddTag() {
     const me = this;
-    const { addTags } = me.props;
-    const lang = me.lang;
+    const { addTags, locale } = me.props;
+    const lang = Lang[locale.toLowerCase()];
     if (!addTags) {
       return null;
     }
@@ -100,19 +99,19 @@ class Tag extends React.Component {
             ref={me.saveRef('input')}
             className="kuma-input"
             placeholder={lang.inputPlaceholder}
-            onChange={me.onInputChange.bind(me)}
-            onBlur={me.onInputBlur.bind(me)}
-            onKeyDown={me.onInputKeyDown.bind(me)}
+            onChange={(e) => { me.onInputChange(e); }}
+            onBlur={() => { me.onInputBlur(); }}
+            onKeyDown={(e) => { me.onInputKeyDown(e); }}
             value={me.state.inputValue}
           />
-          <span className="uxcore-tag-add-input-submit" onMouseDown={me.onAdd.bind(me)}><i
-            className="kuma-icon kuma-icon-choose"
-          /></span>
+          <span className="uxcore-tag-add-input-submit" onMouseDown={() => { me.onAdd(); }}>
+            <Icon name="biaoqianxuanze-duoxuan-gou" />
+          </span>
         </li>
       );
     }
     return (
-      <li className="uxcore-tag-add" onClick={me.onClickAddButton.bind(me)}>
+      <li className="uxcore-tag-add" onClick={() => { me.onClickAddButton(); }}>
         <i className="kuma-icon kuma-icon-add" />
       </li>
     );

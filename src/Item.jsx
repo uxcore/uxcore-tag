@@ -10,6 +10,7 @@
 const React = require('react');
 const classnames = require('classnames');
 const Popover = require('uxcore-popover');
+const Icon = require('uxcore-icon');
 
 const Lang = require('./i18n');
 
@@ -21,8 +22,6 @@ class TagItem extends React.Component {
     this.state = {
       animationTag: '',
     };
-
-    this.lang = Lang[props.locale];
   }
 
   componentWillReceiveProps(nextProps) {
@@ -51,7 +50,7 @@ class TagItem extends React.Component {
     props.onAddCount(tag);
   }
 
-  onDelete(tag, cb) {
+  onDelete(tag, cb = () => { }) {
     const me = this;
     const props = me.props;
 
@@ -72,7 +71,19 @@ class TagItem extends React.Component {
   render() {
     const me = this;
     const props = me.props;
-    const lang = me.lang;
+    const {
+      prefixCls,
+      locale,
+      type,
+      className,
+      canDelete,
+      tag, children,
+      canAddCount,
+      count,
+      maxDisplayCount,
+      confirmDeleteText,
+    } = props;
+    const lang = Lang[locale];
 
     let deleteOverlay;
 
@@ -87,71 +98,72 @@ class TagItem extends React.Component {
 
     return (
       <li
-        key={props.key}
-        className={classnames('uxcore-tag-item', {
-          [props.className]: !!props.className,
-          'can-delete': props.canDelete,
+        className={classnames(prefixCls, {
+          [className]: !!className,
+          'can-delete': canDelete,
+          [`${prefixCls}-show`]: !!type,
+          [`${prefixCls}-${type}`]: !!type,
         })}
       >
         <span
-          className="uxcore-tag-item-tag"
-          onClick={me.onClick.bind(me, props.tag)}
-        >{props.children}</span>
+          className={`${prefixCls}-tag`}
+          onClick={me.onClick.bind(me, tag)}
+        >{children}</span>
         <span
-          className={classnames('uxcore-tag-item-option', {
-            'can-add-count': props.canAddCount,
-            'is-zero': props.count === 0,
+          className={classnames(`${prefixCls}-option`, {
+            'can-add-count': canAddCount,
+            'is-zero': count === 0,
           })}
         >
           <span
-            className={classnames('uxcore-tag-item-count', {
-              'max-count': props.count > props.maxDisplayCount,
+            className={classnames(`${prefixCls}-count`, {
+              'max-count': count > maxDisplayCount,
             })}
-          >{me.renderCount(props.count)}</span>
+          >{me.renderCount(count)}</span>
           <span
-            className="uxcore-tag-item-add-count"
-            onClick={me.onAddCount.bind(me, props.tag)}
+            className={`${prefixCls}-add-count`}
+            onClick={me.onAddCount.bind(me, tag)}
           >
-            <i className="kuma-icon kuma-icon-add" />
+            <Icon name="shoucang" />
           </span>
           <span
-            className={classnames('uxcore-tag-item-add-animation', {
-              show: me.state.animationTag === props.tag,
+            className={classnames(`${prefixCls}-add-animation`, {
+              show: me.state.animationTag === tag,
             })}
           >+1</span>
-          {props.confirmDeleteText ? <Popover
-            overlay={deleteOverlay}
-            placement="top"
-            trigger="click"
-            showButton
-            onOk={me.onDelete.bind(me, props.tag)}
-            okText={lang.deleteOkText}
-            cancelText={lang.deleteCancelText}
-          >
-            <span className="uxcore-tag-item-delete">
-              <i className="kuma-icon kuma-icon-close" />
-            </span>
-          </Popover> : <span
-            className="uxcore-tag-item-delete"
-            onClick={me.onDelete.bind(me, props.tag)}
-          ><i className="kuma-icon kuma-icon-close" />
-          </span>}
-
         </span>
+        {confirmDeleteText ?
+          (
+            <Popover
+              overlay={deleteOverlay}
+              placement="top"
+              trigger="click"
+              showButton
+              onOk={(hideCallback) => { me.onDelete(tag, hideCallback); }}
+              okText={lang.deleteOkText}
+              cancelText={lang.deleteCancelText}
+            >
+              <Icon name={(type && canDelete) ? 'biaoqian-qingchu' : 'biaodanlei-tongyongqingchu'} />
+            </Popover>
+          ) : (
+            <Icon name={(type && canDelete) ? 'biaoqian-qingchu' : 'biaodanlei-tongyongqingchu'} onClick={() => { me.onDelete(tag); }} />
+          )
+        }
       </li>
     );
   }
 }
 
 TagItem.defaultProps = {
+  prefixCls: 'uxcore-tag-item',
   className: '',
   count: 0,                   // 标签后面的数字
   canAddCount: false,         // 是否可以增加数字
   canDelete: false,           // 是否可以删除标签
-  onClick: () => {},          // 点标签回调
+  onClick: () => { },          // 点标签回调
   maxDisplayCount: 99,        // 最大显示数字
-  onAddCount: () => {},       // 点击增加数字的加号回调
-  onDelete: () => {},         // 点击删除icon回调 注意手动调用cb，否则弹窗不会消失
+  onAddCount: () => { },       // 点击增加数字的加号回调
+  onDelete: () => { },         // 点击删除icon回调 注意手动调用cb，否则弹窗不会消失
   confirmDeleteText: '',      // 确认删除文案，如果不填则直接触发onDelete回调
   locale: 'zh-cn',
 };
@@ -160,6 +172,7 @@ TagItem.defaultProps = {
 // http://facebook.github.io/react/docs/reusable-components.html
 TagItem.propTypes = {
   className: React.PropTypes.string,
+  type: React.PropTypes.oneOf(['show', 'success', 'danger', 'info', 'warning']),
   tag: React.PropTypes.string,
   count: React.PropTypes.number,
   canAddCount: React.PropTypes.bool,
