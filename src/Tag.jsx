@@ -62,9 +62,9 @@ class Tag extends React.Component {
   onInputBlur() {
     const me = this;
 
-    // me.setState({
-    //   showInput: false,
-    // });
+    me.setState({
+      showInput: false,
+    });
   }
 
 

@@ -141,10 +141,15 @@
   height: 26px;
   >icon {
     color: @normal-alpha-3;
-    &:active {
-      color: @brand-primary;
-    }
   }
+  &:active {
+      > icon {
+        color: @brand-primary;
+        &:before {
+          content: "\e6b7";
+        }
+      }
+    }
 }
 
 .@{__tagPrefixCls}-item-add-animation {
