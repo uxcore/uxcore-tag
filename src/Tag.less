@@ -41,7 +41,7 @@
   margin: 2px;
   height: 28px;
   line-height: 26px;
-  cursor: pointer;
+  // cursor: pointer;
   position: relative;
   &.create-by-owner {
     background-color: #fafafa;
@@ -70,6 +70,7 @@
 .@{__tagPrefixCls}-item-show {
   border: none;
   background: @normal-alpha-8;
+  cursor: auto;
   height: 24px;
   line-height: 24px;
   .@{__tagPrefixCls}-item-tag {
@@ -100,6 +101,7 @@
     position: static;
     font-size: 12px;
     color: @normal-alpha-4;
+    cursor: pointer;
     display: inline-block;
     transform: scale(0.8);
     margin-right: 2px;
@@ -177,6 +179,7 @@
 }
 
 .@{__tagPrefixCls}-item-option {
+  cursor: pointer;
   &.can-add-count:hover {
     .@{__tagPrefixCls}-item-count {
       display: none;
