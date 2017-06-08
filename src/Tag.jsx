@@ -57,7 +57,7 @@ class Tag extends React.Component {
             me.input.focus();
             isClickSubmit = true;
 
-            window.setTimeout(() => {
+            setTimeout(() => {
               isClickSubmit = false;
             }, 100);
           } else {
@@ -93,7 +93,7 @@ class Tag extends React.Component {
   onInputBlur() {
     const me = this;
 
-    window.setTimeout(() => {
+    setTimeout(() => {
       if (!isClickSubmit) {
         me.setState({
           showInput: false,
