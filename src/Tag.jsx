@@ -39,37 +39,29 @@ class Tag extends React.Component {
     const props = me.props;
     const value = trim(me.state.inputValue);
 
-    switch (props.onAdd.length) {
-
+    if (props.onAdd.length <= 1) {
       // 兼容之前的逻辑
-      case 1:
-        props.onAdd(value);
-        me.setState({
-          inputValue: '',
-        });
-        break;
-
+      props.onAdd(value);
+      me.setState({
+        inputValue: '',
+      });
+    } else {
       // 如果传入两个参数，视为第二个参数为必须回调的参数
       // 返回true时不会收起输入框不会清空输入框
-      case 2:
-        props.onAdd(value, (keepOpen) => {
-          if (keepOpen) {
-            me.input.focus();
-            isClickSubmit = true;
+      props.onAdd(value, (keepOpen) => {
+        if (keepOpen) {
+          me.input.focus();
+          isClickSubmit = true;
 
-            setTimeout(() => {
-              isClickSubmit = false;
-            }, 100);
-          } else {
-            me.setState({
-              inputValue: '',
-            });
-          }
-        });
-        break;
-
-      default:
-        break;
+          setTimeout(() => {
+            isClickSubmit = false;
+          }, 100);
+        } else {
+          me.setState({
+            inputValue: '',
+          });
+        }
+      });
     }
   }
 
@@ -99,7 +91,7 @@ class Tag extends React.Component {
           showInput: false,
         });
       }
-    }, 33);
+    }, 16);
   }
 
 
