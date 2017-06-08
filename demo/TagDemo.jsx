@@ -116,13 +116,15 @@ class Demo extends React.Component {
       createByOwner: false,
     };
 
+    console.log(`添加标签: ${tag}`);
+
+    // return true;
+
     data.push(item);
 
     me.setState({
       data,
     });
-
-    console.log(`添加标签: ${tag}`);
   }
   onLike(tag) {
     const me = this;

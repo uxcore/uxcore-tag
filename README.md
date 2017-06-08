@@ -161,7 +161,7 @@ class Demo extends React.Component {
 |---|---|---|---|---|
 |className|string|optional|''|额外的className|
 |addTags|boolean|optional|true|是否可以新增tag|
-|onAdd(tagName)|function|optional|noop|新增tag的回调,tagName为新增的标签名|
+|onAdd(tagName)|function|optional|noop|新增tag的回调,tagName为新增的标签名；如果在这个回调中返回true表示不会收起&清空输入框|
 |locale|string|optional|'zh-cn'|语言，另可选'en-us', 'pl-pl'|
 
 
