@@ -104,7 +104,7 @@ class Demo extends React.Component {
   onClickTag(tag) {
     console.log('点击标签: ', tag);
   }
-  onAdd(tag) {
+  onAdd(tag, cb) {
     const me = this;
     const data = me.state.data;
 
@@ -116,13 +116,15 @@ class Demo extends React.Component {
       createByOwner: false,
     };
 
+    console.log(`添加标签: ${tag}`);
+
     data.push(item);
 
     me.setState({
       data,
     });
 
-    console.log(`添加标签: ${tag}`);
+    cb(false);
   }
   onLike(tag) {
     const me = this;

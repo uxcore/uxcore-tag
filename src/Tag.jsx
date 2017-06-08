@@ -18,6 +18,10 @@ const KEYCODE_ENTER = 13;
 
 const trim = (text = '') => text.replace(/(^\s*)|(\s*$)/g, '');
 
+// 用于判断blur的时候点击的是不是提交输入框按钮
+// 如果是输入框按钮，并且onAdd返回了true，那么不会收起输入框
+let isClickSubmit = false;
+
 class Tag extends React.Component {
 
   constructor(props) {
@@ -35,11 +39,30 @@ class Tag extends React.Component {
     const props = me.props;
     const value = trim(me.state.inputValue);
 
-    props.onAdd(value);
+    if (props.onAdd.length <= 1) {
+      // 兼容之前的逻辑
+      props.onAdd(value);
+      me.setState({
+        inputValue: '',
+      });
+    } else {
+      // 如果传入两个参数，视为第二个参数为必须回调的参数
+      // 返回true时不会收起输入框不会清空输入框
+      props.onAdd(value, (keepOpen) => {
+        if (keepOpen) {
+          me.input.focus();
+          isClickSubmit = true;
 
-    me.setState({
-      inputValue: '',
-    });
+          setTimeout(() => {
+            isClickSubmit = false;
+          }, 100);
+        } else {
+          me.setState({
+            inputValue: '',
+          });
+        }
+      });
+    }
   }
 
   onInputChange(e) {
@@ -62,9 +85,13 @@ class Tag extends React.Component {
   onInputBlur() {
     const me = this;
 
-    me.setState({
-      showInput: false,
-    });
+    setTimeout(() => {
+      if (!isClickSubmit) {
+        me.setState({
+          showInput: false,
+        });
+      }
+    }, 16);
   }
 
 
@@ -137,7 +164,7 @@ class Tag extends React.Component {
 Tag.defaultProps = {
   className: '',      //
   addTags: true,      // 是否可以新增标签
-  onAdd: () => {},    // 添加标签回调
+  onAdd: () => { },    // 添加标签回调
   locale: 'zh-cn',     // 多语言，可选en-us
 };
 
