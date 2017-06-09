@@ -1,5 +1,9 @@
 # history
 
+## 2.1.0
+
+* `CHANGED` prop `onAdd` support callback to prevent input reset
+
 ## 2.0.0
 
 * `CHANGED` new icon
