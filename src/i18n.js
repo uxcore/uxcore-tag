@@ -1,5 +1,5 @@
 
-module.exports = {
+export default {
   'zh-cn': {
     deleteCancelText: '取消',
     deleteOkText: '确定',
