@@ -2,17 +2,17 @@
  * Tag Component for uxcore
  * @author peijie.dpj
  *
- * Copyright 2015-2016, Uxcore Team, Alinw.
+ * Copyright 2015-2017, Uxcore Team, Alinw.
  * All rights reserved.
  */
 
+import React from 'react';
+import PropTypes from 'prop-types';
+import classnames from 'classnames';
+import Icon from 'uxcore-icon';
 
-const React = require('react');
-const classnames = require('classnames');
-const Icon = require('uxcore-icon');
-
-const TagItem = require('./Item');
-const Lang = require('./i18n');
+import TagItem from './Item';
+import Lang from './i18n';
 
 const KEYCODE_ENTER = 13;
 
@@ -22,11 +22,9 @@ const trim = (text = '') => text.replace(/(^\s*)|(\s*$)/g, '');
 // 如果是输入框按钮，并且onAdd返回了true，那么不会收起输入框
 let isClickSubmit = false;
 
-class Tag extends React.Component {
-
+export default class Tag extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       showInput: false,
       inputValue: '',
@@ -171,13 +169,12 @@ Tag.defaultProps = {
 
 // http://facebook.github.io/react/docs/reusable-components.html
 Tag.propTypes = {
-  className: React.PropTypes.string,
-  addTags: React.PropTypes.bool,
-  onAdd: React.PropTypes.func,
-  locale: React.PropTypes.string,
+  className: PropTypes.string,
+  addTags: PropTypes.bool,
+  onAdd: PropTypes.func,
+  locale: PropTypes.string,
 };
 
 Tag.displayName = 'Tag';
-Tag.Item = TagItem;
 
-module.exports = Tag;
+Tag.Item = TagItem;

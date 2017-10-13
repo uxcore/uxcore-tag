@@ -2,23 +2,21 @@
  * TagItem Component for uxcore
  * @author peijie.dpj
  *
- * Copyright 2015-2016, Uxcore Team, Alinw.
+ * Copyright 2015-2017, Uxcore Team, Alinw.
  * All rights reserved.
  */
 
+import React from 'react';
+import PropTypes from 'prop-types';
+import classnames from 'classnames';
+import Popover from 'uxcore-popover';
+import Icon from 'uxcore-icon';
 
-const React = require('react');
-const classnames = require('classnames');
-const Popover = require('uxcore-popover');
-const Icon = require('uxcore-icon');
+import Lang from './i18n';
 
-const Lang = require('./i18n');
-
-class TagItem extends React.Component {
-
+export default class TagItem extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       animationTag: '',
     };
@@ -171,20 +169,18 @@ TagItem.defaultProps = {
 
 // http://facebook.github.io/react/docs/reusable-components.html
 TagItem.propTypes = {
-  className: React.PropTypes.string,
-  type: React.PropTypes.oneOf(['show', 'success', 'danger', 'info', 'warning']),
-  tag: React.PropTypes.string,
-  count: React.PropTypes.number,
-  canAddCount: React.PropTypes.bool,
-  canDelete: React.PropTypes.bool,
-  onClick: React.PropTypes.func,
-  maxDisplayCount: React.PropTypes.number,
-  onAddCount: React.PropTypes.func,
-  onDelete: React.PropTypes.func,
-  confirmDeleteText: React.PropTypes.string,
-  locale: React.PropTypes.string,
+  className: PropTypes.string,
+  type: PropTypes.oneOf(['show', 'success', 'danger', 'info', 'warning']),
+  tag: PropTypes.string,
+  count: PropTypes.number,
+  canAddCount: PropTypes.bool,
+  canDelete: PropTypes.bool,
+  onClick: PropTypes.func,
+  maxDisplayCount: PropTypes.number,
+  onAddCount: PropTypes.func,
+  onDelete: PropTypes.func,
+  confirmDeleteText: PropTypes.string,
+  locale: PropTypes.string,
 };
 
 TagItem.displayName = 'TagItem';
-
-module.exports = TagItem;
