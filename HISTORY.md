@@ -1,5 +1,9 @@
 # history
 
+## 2.1.1
+
+* `CHANGED` fit React@15
+
 ## 2.1.0
 
 * `CHANGED` prop `onAdd` support callback to prevent input reset
