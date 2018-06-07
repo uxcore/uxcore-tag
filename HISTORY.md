@@ -1,5 +1,9 @@
 # history
 
+## 2.1.2
+
+* `FIX` fix tag text overflow
+
 ## 2.1.1
 
 * `CHANGED` fit React@15
