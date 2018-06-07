@@ -94,6 +94,15 @@ export default class TagItem extends React.Component {
       );
     }
 
+    const tagProps = {
+      className: `${prefixCls}-tag`,
+      onClick: me.onClick.bind(me, tag)
+    }
+
+    if (typeof children === 'string') {
+      tagProps.title = children;
+    }
+
     return (
       <li
         className={classnames(prefixCls, {
@@ -103,10 +112,7 @@ export default class TagItem extends React.Component {
           [`${prefixCls}-${type}`]: !!type,
         })}
       >
-        <span
-          className={`${prefixCls}-tag`}
-          onClick={me.onClick.bind(me, tag)}
-        >{children}</span>
+        <span {...tagProps}>{children}</span>
         <span
           className={classnames(`${prefixCls}-option`, {
             'can-add-count': canAddCount,
