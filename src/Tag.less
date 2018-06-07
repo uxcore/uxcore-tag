@@ -7,252 +7,256 @@
  */
 
 @keyframes tagHide {
-  0% {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-    opacity: 0;
-  }
-  50% {
-    -webkit-transform: translate3d(0, -25px, 0);
-    transform: translate3d(0, -25px, 0);
-    opacity: 0.9;
-  }
-  100% {
-    -webkit-transform: translate3d(0, -30px, 0);
-    transform: translate3d(0, -30px, 0);
-    opacity: 0;
-  }
+    0% {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+        opacity: 0;
+    }
+    50% {
+        -webkit-transform: translate3d(0, -25px, 0);
+        transform: translate3d(0, -25px, 0);
+        opacity: 0.9;
+    }
+    100% {
+        -webkit-transform: translate3d(0, -30px, 0);
+        transform: translate3d(0, -30px, 0);
+        opacity: 0;
+    }
 }
 
 @__tagPrefixCls: uxcore-tag;
 .@{__tagPrefixCls} {
-  color: @normal-alpha-2;
-  li {
-    display: inline-block;
-    vertical-align: top;
-  }
+    color: @normal-alpha-2;
+    li {
+        display: inline-block;
+        vertical-align: top;
+    }
 }
 
 .@{__tagPrefixCls}-item {
-  border: 1px solid @border-color;
-  background-color: #fff;
-  border-radius: @global-border-radius;
-  box-sizing: border-box;
-  margin: 2px;
-  height: 28px;
-  line-height: 26px;
-  // cursor: pointer;
-  position: relative;
-  &.create-by-owner {
-    background-color: #fafafa;
-  }
-  .uxicon-biaodanlei-tongyongqingchu {
-    position: absolute;
-    color: @brand-primary;
-    z-index: 1070;
-    width: 14px;
-    height: 14px;
-    display: none;
-    border-radius: 50%;
-    text-align: center;
-    line-height: 14px;
-    font-size: 14px;
-    right: -8px;
-    top: -8px;
-  }
-  &.can-delete:hover {
-    .uxicon-biaodanlei-tongyongqingchu {
-      display: inline-block;
+    border: 1px solid @border-color;
+    background-color: #fff;
+    border-radius: @global-border-radius;
+    box-sizing: border-box;
+    margin: 2px;
+    height: 28px;
+    line-height: 26px; // cursor: pointer;
+    position: relative;
+    &.create-by-owner {
+        background-color: #fafafa;
     }
-  }
+    .uxicon-biaodanlei-tongyongqingchu {
+        position: absolute;
+        color: @brand-primary;
+        z-index: 1070;
+        width: 14px;
+        height: 14px;
+        display: none;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 14px;
+        font-size: 14px;
+        right: -8px;
+        top: -8px;
+    }
+    &.can-delete:hover {
+        .uxicon-biaodanlei-tongyongqingchu {
+            display: inline-block;
+        }
+    }
 }
 
 .@{__tagPrefixCls}-item-show {
-  border: none;
-  background: @normal-alpha-8;
-  cursor: auto;
-  height: 24px;
-  line-height: 24px;
-  .@{__tagPrefixCls}-item-tag {
+    border: none;
+    background: @normal-alpha-8;
+    cursor: auto;
     height: 24px;
-  }
-  &.can-delete {
+    line-height: 24px;
     .@{__tagPrefixCls}-item-tag {
-      padding-right: 8px;
+        height: 24px;
     }
-  }
-  &.@{__tagPrefixCls}-item-success {
-    background: @brand-success-alpha-7;
-    color: @brand-success;
-  }
-  &.@{__tagPrefixCls}-item-danger {
-    background: @brand-danger-alpha-7;
-    color: @brand-danger;
-  }
-  &.@{__tagPrefixCls}-item-warning {
-    background: @brand-warning-alpha-7;
-    color: @brand-warning;
-  }
-  &.@{__tagPrefixCls}-item-info {
-    background: @brand-link-alpha-7;
-    color: @brand-link;
-  }
-  .uxicon-biaoqian-qingchu {
-    position: static;
-    font-size: 12px;
-    color: @normal-alpha-4;
-    cursor: pointer;
-    display: inline-block;
-    transform: scale(0.8);
-    margin-right: 2px;
-    transition: all 0.2s ease;
-    &:hover {
-      transform: scale(1);
-      color: @dark-alpha-2;
+    &.can-delete {
+        .@{__tagPrefixCls}-item-tag {
+            padding-right: 8px;
+        }
     }
-  }
+    &.@{__tagPrefixCls}-item-success {
+        background: @brand-success-alpha-7;
+        color: @brand-success;
+    }
+    &.@{__tagPrefixCls}-item-danger {
+        background: @brand-danger-alpha-7;
+        color: @brand-danger;
+    }
+    &.@{__tagPrefixCls}-item-warning {
+        background: @brand-warning-alpha-7;
+        color: @brand-warning;
+    }
+    &.@{__tagPrefixCls}-item-info {
+        background: @brand-link-alpha-7;
+        color: @brand-link;
+    }
+    .uxicon-biaoqian-qingchu {
+        position: static;
+        font-size: 12px;
+        color: @normal-alpha-4;
+        cursor: pointer;
+        display: inline-block;
+        transform: scale(0.8);
+        margin-right: 2px;
+        transition: all 0.2s ease;
+        &:hover {
+            transform: scale(1);
+            color: @dark-alpha-2;
+        }
+    }
 }
 
 .@{__tagPrefixCls}-item-tag {
-  display: inline-block;
-  height: 28px;
-  padding: 0 10px;
+    display: inline-block;
+    height: 28px;
+    padding: 0 10px;
+    white-space: nowrap;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: top;
 }
 
 .@{__tagPrefixCls}-item-count {
-  width: 28px;
-  text-align: center;
-  border-left: 1px solid @border-color;
-  display: inline-block;
-  color: @normal-alpha-3;
-  &.is-zero {
-    display: none;
-  }
+    width: 28px;
+    text-align: center;
+    border-left: 1px solid @border-color;
+    display: inline-block;
+    color: @normal-alpha-3;
+    &.is-zero {
+        display: none;
+    }
 }
 
 .@{__tagPrefixCls}-item-add-count {
-  display: none;
-  width: 28px;
-  background: #fff;
-  color: @normal-alpha-3;
-  border-left: 1px solid @border-color;
-  text-align: center;
-  border-bottom-right-radius: 3px;
-  border-top-right-radius: 3px;
-  vertical-align: top;
-  height: 26px;
-  >icon {
+    display: none;
+    width: 28px;
+    background: #fff;
     color: @normal-alpha-3;
-  }
-  &:active {
-      > icon {
-        color: @brand-primary;
-        &:before {
-          content: "\e6b7";
+    border-left: 1px solid @border-color;
+    text-align: center;
+    border-bottom-right-radius: 3px;
+    border-top-right-radius: 3px;
+    vertical-align: top;
+    height: 26px;
+    >icon {
+        color: @normal-alpha-3;
+    }
+    &:active {
+        >icon {
+            color: @brand-primary;
+            &:before {
+                content: "\e6b7";
+            }
         }
-      }
     }
 }
 
 .@{__tagPrefixCls}-item-add-animation {
-  display: none;
-  position: absolute;
-  z-index: 20;
-  width: 18px;
-  height: 18px;
-  background: #FFF6F0;
-  color: @brand-primary;
-  font-size: 10px;
-  line-height: 18px;
-  text-align: center;
-  right: 5px;
-  top: 5px;
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-  &.show {
-    display: inline-block;
-    animation-name: tagHide;
-    transform-origin: center bottom
-  }
+    display: none;
+    position: absolute;
+    z-index: 20;
+    width: 18px;
+    height: 18px;
+    background: #FFF6F0;
+    color: @brand-primary;
+    font-size: 10px;
+    line-height: 18px;
+    text-align: center;
+    right: 5px;
+    top: 5px;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    &.show {
+        display: inline-block;
+        animation-name: tagHide;
+        transform-origin: center bottom
+    }
 }
 
 .@{__tagPrefixCls}-item-option {
-  cursor: pointer;
-  &.can-add-count:hover {
-    .@{__tagPrefixCls}-item-count {
-      display: none;
+    cursor: pointer;
+    &.can-add-count:hover {
+        .@{__tagPrefixCls}-item-count {
+            display: none;
+        }
+        .@{__tagPrefixCls}-item-add-count {
+            display: inline-block;
+        }
     }
-    .@{__tagPrefixCls}-item-add-count {
-      display: inline-block;
+    &.is-zero {
+        .@{__tagPrefixCls}-item-count {
+            display: none;
+        }
     }
-  }
-  &.is-zero {
-    .@{__tagPrefixCls}-item-count {
-      display: none;
+    &.is-zero.can-add-count {
+        .@{__tagPrefixCls}-item-add-count {
+            display: inline-block;
+        }
     }
-  }
-  &.is-zero.can-add-count {
-    .@{__tagPrefixCls}-item-add-count {
-      display: inline-block;
-    }
-  }
 }
 
 .@{__tagPrefixCls}-add {
-  border: 1px solid @border-color;
-  background-color: white;
-  border-radius: @global-border-radius;
-  box-sizing: border-box;
-  margin: 2px;
-  height: 28px;
-  width: 28px;
-  line-height: 28px;
-  cursor: pointer;
-  position: relative;
-  text-align: center;
-  >i {
-    color: @brand-primary;
-  }
+    border: 1px solid @border-color;
+    background-color: white;
+    border-radius: @global-border-radius;
+    box-sizing: border-box;
+    margin: 2px;
+    height: 28px;
+    width: 28px;
+    line-height: 28px;
+    cursor: pointer;
+    position: relative;
+    text-align: center;
+    >i {
+        color: @brand-primary;
+    }
 }
 
 .@{__tagPrefixCls}-add-input {
-  position: relative;
-  padding-right: 28px;
-  margin: 2px;
-  .kuma-input {
-    vertical-align: top;
-    height: 28px;
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
-    border-right: none;
-    width: 132px;
-  }
-  .@{__tagPrefixCls}-add-input-submit {
-    vertical-align: top;
-    display: inline-block;
-    width: 28px;
-    height: 28px;
-    background: @brand-primary;
-    text-align: center;
-    line-height: 28px;
-    color: #fff;
-    border-top-right-radius: 3px;
-    border-bottom-right-radius: 3px;
-    cursor: pointer;
-    position: absolute;
-    right: 0;
-    top: 0;
-    i {
-      font-size: 24px;
+    position: relative;
+    padding-right: 28px;
+    margin: 2px;
+    .kuma-input {
+        vertical-align: top;
+        height: 28px;
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+        border-right: none;
+        width: 132px;
     }
-  }
+    .@{__tagPrefixCls}-add-input-submit {
+        vertical-align: top;
+        display: inline-block;
+        width: 28px;
+        height: 28px;
+        background: @brand-primary;
+        text-align: center;
+        line-height: 28px;
+        color: #fff;
+        border-top-right-radius: 3px;
+        border-bottom-right-radius: 3px;
+        cursor: pointer;
+        position: absolute;
+        right: 0;
+        top: 0;
+        i {
+            font-size: 24px;
+        }
+    }
 }
 
 .@{__tagPrefixCls}-popup-delete {
-  i {
-    color: @brand-primary;
-    margin-right: 8px;
-  }
+    i {
+        color: @brand-primary;
+        margin-right: 8px;
+    }
 }
