@@ -13,26 +13,26 @@ import Popover from 'uxcore-popover';
 import Icon from 'uxcore-icon';
 
 import Lang from './i18n';
+import { polyfill } from 'react-lifecycles-compat';
 
-export default class TagItem extends React.Component {
+class TagItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       animationTag: '',
+      count: props.count,
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    const me = this;
-    const props = me.props;
-
-    if (nextProps.count === props.count + 1) {
-      me.setState({
+  static getDerivedStateFromProps(props, state) {
+    if (props.count === state.count + 1) {
+      return {
         animationTag: props.tag,
-      });
+        count: props.count,
+      }
     }
+    return null;
   }
-
 
   onClick(tag) {
     const me = this;
@@ -68,7 +68,7 @@ export default class TagItem extends React.Component {
 
   render() {
     const me = this;
-    const props = me.props;
+    const { props, state } = me;
     const {
       prefixCls,
       locale,
@@ -77,10 +77,12 @@ export default class TagItem extends React.Component {
       canDelete,
       tag, children,
       canAddCount,
-      count,
       maxDisplayCount,
       confirmDeleteText,
     } = props;
+    const { 
+      count,
+    } = state;
     const lang = Lang[locale];
 
     let deleteOverlay;
@@ -128,7 +130,7 @@ export default class TagItem extends React.Component {
             className={`${prefixCls}-add-count`}
             onClick={me.onAddCount.bind(me, tag)}
           >
-            <Icon name="shoucang" />
+            <Icon name="shoucang" usei />
           </span>
           <span
             className={classnames(`${prefixCls}-add-animation`, {
@@ -147,10 +149,10 @@ export default class TagItem extends React.Component {
               okText={lang.deleteOkText}
               cancelText={lang.deleteCancelText}
             >
-              <Icon name={(type && canDelete) ? 'biaoqian-qingchu' : 'biaodanlei-tongyongqingchu'} />
+              <Icon name={(type && canDelete) ? 'biaoqian-qingchu' : 'biaodanlei-tongyongqingchu'} usei />
             </Popover>
           ) : (
-            <Icon name={(type && canDelete) ? 'biaoqian-qingchu' : 'biaodanlei-tongyongqingchu'} onClick={() => { me.onDelete(tag); }} />
+            <Icon name={(type && canDelete) ? 'biaoqian-qingchu' : 'biaodanlei-tongyongqingchu'} onClick={() => { me.onDelete(tag); }} usei />
           )
         }
       </li>
@@ -190,3 +192,7 @@ TagItem.propTypes = {
 };
 
 TagItem.displayName = 'TagItem';
+
+polyfill(TagItem);
+
+export default TagItem;
