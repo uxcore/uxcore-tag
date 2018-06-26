@@ -1,5 +1,9 @@
 # history
 
+## 2.2.0
+
+* `CHANGED` upgrade react to v16
+
 ## 2.1.2
 
 * `FIX` fix tag text overflow
