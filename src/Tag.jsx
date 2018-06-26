@@ -130,7 +130,7 @@ export default class Tag extends React.Component {
             value={me.state.inputValue}
           />
           <span className="uxcore-tag-add-input-submit" onMouseDown={() => { me.onAdd(); }}>
-            <Icon name="biaoqianxuanze-duoxuan-gou" />
+            <Icon name="biaoqianxuanze-duoxuan-gou" usei />
           </span>
         </li>
       );
