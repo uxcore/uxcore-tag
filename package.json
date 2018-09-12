@@ -1,6 +1,6 @@
 {
   "name": "uxcore-tag",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "uxcore-tag component for uxcore.",
   "repository": "https://github.com/uxcore/uxcore-tag.git",
   "author": "peijie.dpj",
@@ -31,8 +31,10 @@
     "Tag"
   ],
   "devDependencies": {
+    "babel-polyfill": "6.x",
     "console-polyfill": "^0.2.2",
     "enzyme": "^3.0.0",
+    "enzyme-adapter-react-16": "1.x",
     "expect.js": "~0.3.1",
     "kuma-base": "1.x",
     "react": "16.x",
@@ -40,8 +42,7 @@
     "react-test-renderer": "16.x",
     "uxcore-kuma": "*",
     "uxcore-tools": "^0.3.0",
-    "babel-polyfill": "6.x",
-    "enzyme-adapter-react-16": "1.x"
+    "uxcore-tooltip": "*"
   },
   "dependencies": {
     "classnames": "^2.1.2",

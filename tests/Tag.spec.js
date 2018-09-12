@@ -9,6 +9,8 @@ const TagItem = Tag.Item;
 
 Enzyme.configure({ adapter: new Adapter() });
 
+const prefixCls = 'uxcore-tag';
+
 describe('Tag', () => {
 	it('render correct', () => {
 		mount(<Tag />);
@@ -185,7 +187,7 @@ describe('TagItem props', () => {
 
 	it('count support', () => {
 		[0, 20].forEach(count => {
-			const wrapper = mount(<TagItem count={count} />);
+			const wrapper = mount(<TagItem count={count} prefixCls={`${prefixCls}-item`} />);
 			if (count === 0) {
 				expect(wrapper.find('.uxcore-tag-item-option').hasClass('is-zero'));
 			}
@@ -194,7 +196,7 @@ describe('TagItem props', () => {
 	});
 
 	it('maxDisplayCount support', () => {
-		expect(mount(<TagItem maxDisplayCount={10} count={100} />).find('.uxcore-tag-item-count').text()).to.equal('10+');
+		expect(mount(<TagItem maxDisplayCount={10} count={100} prefixCls={`${prefixCls}-item`} />).find('.uxcore-tag-item-count').text()).to.equal('10+');
 	});
 
 	it('canDelete support', () => {
@@ -205,7 +207,7 @@ describe('TagItem props', () => {
 	it('onClick support', () => {
 		let clickedTag;
 		const handleClickTag = (tag) => { clickedTag = tag; };
-		const wrapper = mount(<TagItem onClick={handleClickTag} tag="TagItem">TagItem</TagItem>);
+		const wrapper = mount(<TagItem onClick={handleClickTag} tag="TagItem" prefixCls={`${prefixCls}-item`}>TagItem</TagItem>);
 		wrapper.find('.uxcore-tag-item-tag').simulate('click');
 		expect(clickedTag).to.be('TagItem');
 	});
@@ -222,7 +224,7 @@ describe('TagItem props', () => {
 		let deletedTag;
 		const handleDeleteTag = (tag) => { deletedTag = tag; };
 		const confirmDeleteText = '确认删除该Tag吗?';
-		const wrapper = mount(<TagItem onDelete={handleDeleteTag} confirmDeleteText={confirmDeleteText} tag={TagItem}>TagItem</TagItem>);
+		const wrapper = mount(<Tag><TagItem prefixCls={`${prefixCls}-item`} onDelete={handleDeleteTag} confirmDeleteText={confirmDeleteText} tag={TagItem}>TagItem</TagItem></Tag>);
 		wrapper.find('.uxcore-icon.uxicon-biaodanlei-tongyongqingchu').simulate('click');
 		expect(deletedTag).to.be(undefined);
 		expect(document.querySelector('.uxcore-tag-popup-delete > span').innerText).to.be(confirmDeleteText);
@@ -235,7 +237,7 @@ describe('TagItem props', () => {
 			addTag = tag;
 			addTime += 1;
 		}
-		const wrapper = mount(<TagItem tag="1" canAddCount onAddCount={handleAddCount}>TagItem</TagItem>);
+		const wrapper = mount(<TagItem prefixCls={`${prefixCls}-item`} tag="1" canAddCount onAddCount={handleAddCount}>TagItem</TagItem>);
 		wrapper.find('.uxcore-tag-item-add-count').simulate('click');
 		expect(addTime).to.be(1);
 		expect(addTag).to.be('1');
@@ -244,7 +246,7 @@ describe('TagItem props', () => {
 	it('propsChange count + 1', () => {
 		const props = {tag: 'tag', count: 1}
 		const handleAddCount = () => { props.count += 1; };
-		const wrapper = mount(<TagItem canAddCount onAddCount={handleAddCount} {...props}></TagItem>);
+		const wrapper = mount(<TagItem prefixCls={`${prefixCls}-item`} canAddCount onAddCount={handleAddCount} {...props}></TagItem>);
 		wrapper.find('.uxcore-tag-item-add-count').simulate('click');
 		expect(props.count).to.be(2);
 

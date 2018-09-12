@@ -32,6 +32,16 @@ export default class Tag extends React.Component {
     };
   }
 
+  static childContextTypes = {
+    tagPrefixCls: PropTypes.string,
+  }
+
+  getChildContext () {
+    return {
+      tagPrefixCls: this.props.prefixCls,
+    }
+  }
+
   onAdd() {
     const me = this;
     const props = me.props;
@@ -112,14 +122,14 @@ export default class Tag extends React.Component {
 
   renderAddTag() {
     const me = this;
-    const { addTags, locale } = me.props;
+    const { addTags, locale, prefixCls } = me.props;
     const lang = Lang[locale.toLowerCase()];
     if (!addTags) {
       return null;
     }
     if (me.state.showInput) {
       return (
-        <li className="uxcore-tag-add-input">
+        <li className={`${prefixCls}-add-input`}>
           <input
             ref={me.saveRef('input')}
             className="kuma-input"
@@ -129,14 +139,17 @@ export default class Tag extends React.Component {
             onKeyDown={(e) => { me.onInputKeyDown(e); }}
             value={me.state.inputValue}
           />
-          <span className="uxcore-tag-add-input-submit" onMouseDown={() => { me.onAdd(); }}>
+          <span className={`${prefixCls}-add-input-submit`} onMouseDown={() => { me.onAdd(); }}>
             <Icon name="biaoqianxuanze-duoxuan-gou" usei />
           </span>
         </li>
       );
     }
     return (
-      <li className="uxcore-tag-add" onClick={() => { me.onClickAddButton(); }}>
+      <li
+        className={`${prefixCls}-add`}
+        onClick={me.onClickAddButton.bind(me)}
+      >
         <i className="kuma-icon kuma-icon-add" />
       </li>
     );
@@ -148,7 +161,7 @@ export default class Tag extends React.Component {
     const props = me.props;
     return (
       <ul
-        className={classnames('uxcore-tag', {
+        className={classnames(props.prefixCls, {
           [props.className]: !!props.className,
         })}
       >
@@ -160,6 +173,7 @@ export default class Tag extends React.Component {
 }
 
 Tag.defaultProps = {
+  prefixCls: 'uxcore-tag',
   className: '',      //
   addTags: true,      // 是否可以新增标签
   onAdd: () => { },    // 添加标签回调
@@ -169,6 +183,7 @@ Tag.defaultProps = {
 
 // http://facebook.github.io/react/docs/reusable-components.html
 Tag.propTypes = {
+  prefixCls: PropTypes.string,
   className: PropTypes.string,
   addTags: PropTypes.bool,
   onAdd: PropTypes.func,

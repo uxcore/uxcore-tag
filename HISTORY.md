@@ -1,5 +1,9 @@
 # history
 
+## 2.2.1
+
+`CHANGED` support js style export
+
 ## 2.2.0
 
 * `CHANGED` upgrade react to v16

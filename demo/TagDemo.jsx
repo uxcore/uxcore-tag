@@ -11,6 +11,7 @@
 /* eslint-disable no-param-reassign */
 
 const React = require('react');
+const Tooltip = require('uxcore-tooltip');
 
 const Tag = require('../src');
 
@@ -186,24 +187,31 @@ class Demo extends React.Component {
       <div className="demo">
         <h2>互动性 TAG</h2>
         <Tag {...props}>
-          {me.state.data.map((item, index) => (
-            <Item
-              key={`uxcore-tag-item-${index}`}
-              className={item.createByOwner ? 'create-by-owner' : ''}
-              tag={item.tag}
-              count={item.count}
-              canAddCount={item.canAddCount}
-              canDelete
-              onClick={me.onClickTag.bind(me)}
-              maxDisplayCount={99}
-              onAddCount={me.onLike.bind(me)}
-              onDelete={me.onDelete.bind(me)}
-              confirmDeleteText="确定删除该标签吗?"
-              locale="zh-cn"
-            >
-              {item.tag}
-            </Item>
-          ))}
+          {me.state.data.map((item, index) => {
+            const res = (
+              <Item
+                key={`uxcore-tag-item-${index}`}
+                className={item.createByOwner ? 'create-by-owner' : ''}
+                tag={item.tag}
+                count={item.count}
+                canAddCount={item.canAddCount}
+                canDelete
+                onClick={me.onClickTag.bind(me)}
+                maxDisplayCount={99}
+                onAddCount={me.onLike.bind(me)}
+                onDelete={me.onDelete.bind(me)}
+                confirmDeleteText="确定删除该标签吗?"
+                locale="zh-cn"
+              >
+                {item.tag}
+              </Item>);
+
+            if (index < 5) {
+              return <Tooltip overlay={<p>test</p>} placement="bottom" trigger={["hover"]}><span>{res}</span></Tooltip>;
+            }
+
+            return res;
+          })}
         </Tag>
         <h2>展示型 TAG （只读）</h2>
         <Tag addTags={false}>

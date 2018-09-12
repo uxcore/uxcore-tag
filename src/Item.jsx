@@ -11,9 +11,9 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import Popover from 'uxcore-popover';
 import Icon from 'uxcore-icon';
+import { polyfill } from 'react-lifecycles-compat';
 
 import Lang from './i18n';
-import { polyfill } from 'react-lifecycles-compat';
 
 class TagItem extends React.Component {
   constructor(props) {
@@ -24,40 +24,40 @@ class TagItem extends React.Component {
     };
   }
 
+  static contextTypes = {
+    tagPrefixCls: PropTypes.string
+  }
+
   static getDerivedStateFromProps(props, state) {
     if (props.count === state.count + 1) {
       return {
         animationTag: props.tag,
         count: props.count,
-      }
+      };
     }
     return null;
   }
 
   onClick(tag) {
-    const me = this;
-    const props = me.props;
+    const { props } = this;
 
     props.onClick(tag);
   }
 
   onAddCount(tag) {
-    const me = this;
-    const props = me.props;
+    const { props } = this;
 
     props.onAddCount(tag);
   }
 
   onDelete(tag, cb = () => { }) {
-    const me = this;
-    const props = me.props;
+    const { props } = this;
 
     props.onDelete(tag, cb);
   }
 
   renderCount(num) {
-    const me = this;
-    const props = me.props;
+    const { props } = this;
 
     if (num > props.maxDisplayCount) {
       return `${props.maxDisplayCount}+`;
@@ -68,9 +68,8 @@ class TagItem extends React.Component {
 
   render() {
     const me = this;
-    const { props, state } = me;
+    const { props, state, context } = me;
     const {
-      prefixCls,
       locale,
       type,
       className,
@@ -80,16 +79,19 @@ class TagItem extends React.Component {
       maxDisplayCount,
       confirmDeleteText,
     } = props;
-    const { 
+    const {
       count,
     } = state;
+    
+    const deleteOverlayPrefixCls = context.tagPrefixCls;
+    const prefixCls = props.prefixCls ? props.prefixCls : `${context.tagPrefixCls}-item`;
     const lang = Lang[locale];
 
     let deleteOverlay;
 
     if (props.confirmDeleteText) {
       deleteOverlay = (
-        <div className="uxcore-tag-popup-delete">
+        <div className={`${deleteOverlayPrefixCls}-popup-delete`}>
           <i className="kuma-icon kuma-icon-caution" />
           <span>{props.confirmDeleteText}</span>
         </div>
@@ -98,8 +100,8 @@ class TagItem extends React.Component {
 
     const tagProps = {
       className: `${prefixCls}-tag`,
-      onClick: me.onClick.bind(me, tag)
-    }
+      onClick: me.onClick.bind(me, tag),
+    };
 
     if (typeof children === 'string') {
       tagProps.title = children;
@@ -107,7 +109,7 @@ class TagItem extends React.Component {
 
     return (
       <li
-        className={classnames(prefixCls, {
+        className={classnames(`${prefixCls}`, {
           [className]: !!className,
           'can-delete': canDelete,
           [`${prefixCls}-show`]: !!type,
@@ -125,7 +127,9 @@ class TagItem extends React.Component {
             className={classnames(`${prefixCls}-count`, {
               'max-count': count > maxDisplayCount,
             })}
-          >{me.renderCount(count)}</span>
+          >
+            {me.renderCount(count)}
+          </span>
           <span
             className={`${prefixCls}-add-count`}
             onClick={me.onAddCount.bind(me, tag)}
@@ -136,10 +140,12 @@ class TagItem extends React.Component {
             className={classnames(`${prefixCls}-add-animation`, {
               show: me.state.animationTag === tag,
             })}
-          >+1</span>
+          >
+            +1
+          </span>
         </span>
-        {confirmDeleteText ?
-          (
+        {confirmDeleteText
+          ? (
             <Popover
               overlay={deleteOverlay}
               placement="top"
@@ -161,7 +167,6 @@ class TagItem extends React.Component {
 }
 
 TagItem.defaultProps = {
-  prefixCls: 'uxcore-tag-item',
   className: '',
   count: 0,                   // 标签后面的数字
   canAddCount: false,         // 是否可以增加数字
@@ -177,6 +182,7 @@ TagItem.defaultProps = {
 
 // http://facebook.github.io/react/docs/reusable-components.html
 TagItem.propTypes = {
+  prefixCls: PropTypes.string,
   className: PropTypes.string,
   type: PropTypes.oneOf(['show', 'success', 'danger', 'info', 'warning']),
   tag: PropTypes.string,
