@@ -38,6 +38,10 @@ class TagItem extends React.Component {
     return null;
   }
 
+  componentWillUnmount() {
+    console.log('unmount');
+  }
+
   onClick(tag) {
     const { props } = this;
 

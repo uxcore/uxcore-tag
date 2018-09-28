@@ -20,13 +20,13 @@ const Item = Tag.Item;
 const tagData = [
   {
     tag: 'owner创建0',
-    count: 0,
+    count: 9999,
     canAddCount: true,
     createByOwner: true,
   },
   {
     tag: 'owner创建1',
-    count: 1,
+    count: 9999,
     canAddCount: true,
     createByOwner: true,
   },
@@ -197,7 +197,7 @@ class Demo extends React.Component {
                 canAddCount={item.canAddCount}
                 canDelete
                 onClick={me.onClickTag.bind(me)}
-                maxDisplayCount={99}
+                maxDisplayCount={999}
                 onAddCount={me.onLike.bind(me)}
                 onDelete={me.onDelete.bind(me)}
                 confirmDeleteText="确定删除该标签吗?"

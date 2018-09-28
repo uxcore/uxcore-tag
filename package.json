@@ -49,8 +49,8 @@
     "object-assign": "^4.0.0",
     "prop-types": "15.x",
     "react-lifecycles-compat": "^3.0.4",
-    "uxcore-icon": "*",
-    "uxcore-popover": "*"
+    "uxcore-icon": "^0.1.22",
+    "uxcore-popover": "^0.6.2"
   },
   "contributors": [],
   "license": "MIT"

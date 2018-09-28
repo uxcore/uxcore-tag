@@ -51,7 +51,9 @@
         z-index: 1070;
         width: 14px;
         height: 14px;
-        display: none;
+        display: inline-block;
+        opacity: 0;
+        pointer-events: none;
         border-radius: 50%;
         text-align: center;
         line-height: 14px;
@@ -61,7 +63,8 @@
     }
     &.can-delete:hover {
         .uxicon-biaodanlei-tongyongqingchu {
-            display: inline-block;
+            opacity: 1;
+            pointer-events: initial;
         }
     }
 }
@@ -74,6 +77,11 @@
     line-height: 24px;
     .@{__tagPrefixCls}-item-tag {
         height: 24px;
+    }
+
+    // 针对展示类型标签，不需要使用透明度的调整方案
+    .@{__tagPrefixCls}-item-option.is-zero {
+        display: none;
     }
     &.can-delete {
         .@{__tagPrefixCls}-item-tag {
@@ -124,19 +132,29 @@
 }
 
 .@{__tagPrefixCls}-item-count {
-    width: 28px;
+    width: auto;
+    min-width: 28px;
+    padding: 0 4px;
     text-align: center;
     border-left: 1px solid @border-color;
     display: inline-block;
     color: @normal-alpha-3;
     &.is-zero {
-        display: none;
+        display: inline-block;
+        opacity: 0;
+        pointer-events: none;
     }
 }
 
 .@{__tagPrefixCls}-item-add-count {
-    display: none;
-    width: 28px;
+    position: absolute;
+    left: 0;
+    top: -6px;
+    right: 0;
+    display: inline-block;
+    opacity: 0;
+    pointer-events: none;
+    width: auto;
     background: #fff;
     color: @normal-alpha-3;
     border-left: 1px solid @border-color;
@@ -184,22 +202,31 @@
 
 .@{__tagPrefixCls}-item-option {
     cursor: pointer;
+    position: relative;
     &.can-add-count:hover {
         .@{__tagPrefixCls}-item-count {
-            display: none;
+            display: inline-block;
+            opacity: 0;
+            pointer-events: none;
         }
         .@{__tagPrefixCls}-item-add-count {
             display: inline-block;
+            opacity: 1;
+            pointer-events: initial;
         }
     }
     &.is-zero {
         .@{__tagPrefixCls}-item-count {
-            display: none;
+            display: inline-block;
+            opacity: 0;
+            pointer-events: none;
         }
     }
     &.is-zero.can-add-count {
         .@{__tagPrefixCls}-item-add-count {
             display: inline-block;
+            opacity: 1;
+            pointer-events: initial;
         }
     }
 }
