@@ -37,9 +37,9 @@ const tagData = [
     createByOwner: true,
   },
   {
-    tag: '自己创建0',
+    tag: '自己创建0 不可点赞',
     count: 0,
-    canAddCount: true,
+    canAddCount: false,
     createByOwner: false,
   },
   {

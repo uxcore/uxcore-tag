@@ -217,6 +217,11 @@
     }
     &.is-zero {
         .@{__tagPrefixCls}-item-count {
+            display: none;
+        }
+    }
+    &.can-add-count.is-zero  {
+        .@{__tagPrefixCls}-item-count {
             display: inline-block;
             opacity: 0;
             pointer-events: none;

@@ -1,8 +1,17 @@
 # history
 
+## 2.2.3
+
+* `FIX` fix 2.2.2 style change bug
+
+## 2.2.2
+
+* `CHANGE` support maxCount 999+ style
+* `CHANGE` fix delete confirm bug
+
 ## 2.2.1
 
-`CHANGED` support js style export
+* `CHANGED` support js style export
 
 ## 2.2.0
 
