@@ -122,7 +122,7 @@ export default class Tag extends React.Component {
 
   renderAddTag() {
     const me = this;
-    const { addTags, locale, prefixCls } = me.props;
+    const { addTags, locale, prefixCls, placeholder } = me.props;
     const lang = Lang[locale.toLowerCase()];
     if (!addTags) {
       return null;
@@ -133,7 +133,7 @@ export default class Tag extends React.Component {
           <input
             ref={me.saveRef('input')}
             className="kuma-input"
-            placeholder={lang.inputPlaceholder}
+            placeholder={placeholder || lang.inputPlaceholder}
             onChange={(e) => { me.onInputChange(e); }}
             onBlur={() => { me.onInputBlur(); }}
             onKeyDown={(e) => { me.onInputKeyDown(e); }}
